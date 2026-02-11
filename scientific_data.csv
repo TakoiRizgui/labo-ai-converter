@@ -1,0 +1,8 @@
+analyte,molar_mass,unit,source,common_units
+creatinine,113.12,g/mol,PubChem NIH,µmol/L;mg/dL;g/L
+uree,60.06,g/mol,PubChem NIH,mmol/L;mg/dL;g/L
+glucose,180.16,g/mol,PubChem NIH,mmol/L;mg/dL;g/L
+cholesterol,386.65,g/mol,PubChem NIH,mmol/L;mg/dL;g/L
+triglycerides,885.43,g/mol,PubChem NIH,mmol/L;mg/dL;g/L
+bilirubine,584.66,g/mol,PubChem NIH,µmol/L;mg/dL;g/L
+acide_urique,168.11,g/mol,PubChem NIH,µmol/L;mg/dL;g/L
