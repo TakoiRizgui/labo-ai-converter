@@ -1,0 +1,28 @@
+[theme]
+primaryColor = "#FF4B4B"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
+font = "sans serif"
+
+[server]
+headless = true
+port = 8501
+enableCORS = false
+```
+
+### ✅ Sauvegarde comme :
+
+1. **Fichier** → **Enregistrer sous...**
+2. **Va dans le dossier** : `Labo_AI_App\.streamlit\`
+3. **Nom** : `config.toml`
+4. **Type** : **Tous les fichiers (*.*)**
+5. **Enregistrer**
+
+---
+
+## 📝 ENSUITE : CRÉER packages.txt
+
+### ✅ Nouveau Bloc-notes, copie :
+```
+# System packages (none required)
