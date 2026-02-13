@@ -5,7 +5,10 @@
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-red.svg)](https://streamlit.io/)
 [![Ollama](https://img.shields.io/badge/Ollama-Local%20AI-green.svg)](https://ollama.com/)
+[![Tests](https://img.shields.io/badge/tests-42%20passed-brightgreen.svg)](tests/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+**Live Demo:** [labo-ai-converter.streamlit.app](https://labo-ai-converter-drxf2dkrmucwjieyekizka.streamlit.app/)
 
 ---
 
@@ -16,10 +19,11 @@
 - [🤖 AI Features](#-ai-features)
 - [Scientific Foundation](#scientific-foundation)
 - [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Testing](#testing)
 - [Screenshots](#screenshots)
-- [Project Structure](#project-structure)
 - [Future Developments](#future-developments)
 - [Author](#author)
 
@@ -40,6 +44,7 @@ In clinical laboratories, biochemical results are reported in various units (µm
 - ✅ **Traceability** through calculation history and CSV export
 - ✅ **Offline operation** for complete data security compliance
 - ✅ **Quality assurance** aligned with ISO 15189 principles
+- ✅ **Comprehensive test suite** (42 unit tests, 100% passing)
 
 ---
 
@@ -74,6 +79,7 @@ Conversion algorithm uses **mol/L as intermediate unit** for maximum accuracy.
 - Non-decisional tool disclaimer (ISO 15189)
 - Calculation transparency
 - 100% offline AI processing (data never leaves your machine)
+- Comprehensive test coverage (42 unit tests)
 
 ---
 
@@ -128,7 +134,7 @@ JSON Entity Extraction
     ├─ Source unit
     └─ Target unit
     ↓
-Conversion Engine
+Conversion Engine (Tested & Validated)
     ↓
 Result + Explanation
 ```
@@ -149,6 +155,7 @@ Result + Explanation
 - **Entity Recognition**: Analyte, value, units
 - **Fallback Handling**: Graceful degradation if AI unavailable
 - **Response Parsing**: Robust JSON handling with error recovery
+- **Tested**: 42 unit tests ensure reliability
 
 ---
 
@@ -186,8 +193,13 @@ result = mol/L × target_unit_factor × molar_mass
 - **Python 3.11+** - Core programming language
 - **Streamlit** - Web application framework
 - **Pandas** - Data manipulation and CSV handling
-- **Ollama** - Local LLM inference engine
+- **Ollama** - Local LLM inference engine (optional)
 - **Llama 3.2** - Large Language Model (3B parameters)
+
+### Testing & Quality
+- **pytest** - Testing framework
+- **42 unit tests** - Comprehensive test coverage
+- **Medical reference tests** - Validated against clinical standards
 
 ### AI/ML Components
 - **Natural Language Processing** - Entity extraction from unstructured text
@@ -201,6 +213,37 @@ result = mol/L × target_unit_factor × molar_mass
 - **Llama 3.2**: Efficient, accurate, multilingual capabilities
 - **Local-first**: No external API dependencies, data remains secure
 - **Pandas**: Industry standard for data processing in scientific computing
+- **pytest**: Industry-standard testing framework with excellent reporting
+
+---
+
+## 📁 Project Structure
+
+```
+Labo_AI_App/
+├── app.py                      # Main Streamlit application
+├── src/                        # Source code modules
+│   ├── __init__.py
+│   ├── converter.py           # Unit conversion logic
+│   ├── data_loader.py         # Scientific data management
+│   └── ai_handler.py          # AI integration (if using Ollama)
+├── tests/                      # Test suite
+│   ├── __init__.py
+│   ├── test_converter.py      # Conversion function tests (23 tests)
+│   └── test_data_loader.py    # Data loader tests (19 tests)
+├── data/                       # Data files
+│   └── scientific_data.csv    # Molar mass database
+├── screenshots/                # Application screenshots
+│   ├── screenshot1.png
+│   ├── mode_ia.png
+│   └── resultat.png
+├── .streamlit/                 # Streamlit configuration
+│   └── config.toml
+├── requirements.txt            # Python dependencies
+├── README.md                   # This file
+├── TECHNICAL_DOC.md           # Technical documentation
+└── venv/                      # Virtual environment (not committed)
+```
 
 ---
 
@@ -210,11 +253,11 @@ result = mol/L × target_unit_factor × molar_mass
 
 - Python 3.10 or higher
 - pip (Python package manager)
-- Ollama (for AI features)
+- Ollama (optional, for AI features)
 
 ### Step-by-Step Installation
 
-#### 1. Install Ollama
+#### 1. Install Ollama (Optional - for AI Mode)
 
 **Windows:**
 ```bash
@@ -234,7 +277,7 @@ ollama serve
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-#### 2. Download AI Model
+#### 2. Download AI Model (Optional)
 
 ```bash
 ollama pull llama3.2
@@ -323,6 +366,63 @@ Click the **"📥 Export"** button to download calculation history as CSV for qu
 
 ---
 
+## 🧪 Testing
+
+### Running Tests
+
+The project includes a comprehensive test suite with **42 unit tests** covering:
+- ✅ Conversion logic (23 tests)
+- ✅ Data loading and validation (19 tests)
+- ✅ Medical reference values
+- ✅ Edge cases and error handling
+
+**Run all tests:**
+```bash
+pytest tests/ -v
+```
+
+**Run specific test file:**
+```bash
+pytest tests/test_converter.py -v
+```
+
+**Run with coverage:**
+```bash
+pytest tests/ --cov=src --cov-report=html
+```
+
+### Test Categories
+
+#### Conversion Tests (`test_converter.py`)
+- ✅ Medical reference conversions (cholesterol, creatinine, glucose)
+- ✅ Unit validation
+- ✅ Reversibility of conversions
+- ✅ Negative values handling
+- ✅ Invalid units handling
+- ✅ Edge cases (very small/large values)
+- ✅ Precision tests
+- ✅ Clinical reference ranges
+
+#### Data Loader Tests (`test_data_loader.py`)
+- ✅ CSV file loading
+- ✅ Required columns validation
+- ✅ Analyte information retrieval
+- ✅ Case-insensitive lookup
+- ✅ Molar mass validation
+- ✅ Source attribution
+- ✅ Unique analyte names
+- ✅ No missing values in critical columns
+
+### Test Results
+
+```
+======================= 42 passed in 1.03s =======================
+```
+
+**100% test success rate** ✅
+
+---
+
 ## 📸 Screenshots
 
 ### Standard Mode Interface
@@ -339,46 +439,34 @@ Click the **"📥 Export"** button to download calculation history as CSV for qu
 
 ---
 
-## 📁 Project Structure
-
-```
-Labo_AI_App/
-├── app.py                      # Main application with AI integration
-├── scientific_data.csv         # Molar mass database
-├── requirements.txt            # Python dependencies
-├── README.md                   # This file
-├── TECHNICAL_DOC.md           # Technical documentation
-├── screenshots/               # Application screenshots
-│   ├── screenshot1.png
-│   ├── mode_ia.png
-│   └── resultat.png
-└── venv/                      # Virtual environment (not committed)
-```
-
----
-
 ## 🔮 Future Developments
 
-### Phase 1: Enhanced AI Capabilities (Planned)
+### Phase 1: Enhanced Testing & Quality (Planned)
+- Integration tests for end-to-end workflows
+- Performance benchmarking
+- Test coverage > 90%
+- Continuous Integration (CI/CD)
+
+### Phase 2: Enhanced AI Capabilities
 - Multi-turn conversation support
 - Context retention across queries
 - Batch conversion mode via natural language
 - Uncertainty estimation in AI predictions
 
-### Phase 2: Extended Features
+### Phase 3: Extended Features
 - Additional analytes (electrolytes, enzymes, hormones)
 - Reference ranges integration
 - PDF report generation with QR code traceability
 - Multi-language support (French, English, Arabic)
 
-### Phase 3: Deployment & Integration
+### Phase 4: Deployment & Integration
 - Docker containerization
 - Internal lab network deployment
 - LIMS (Laboratory Information Management System) integration
 - REST API for programmatic access
 - User authentication for audit trails
 
-### Phase 4: Advanced Analytics
+### Phase 5: Advanced Analytics
 - Conversion pattern analysis
 - Usage statistics dashboard
 - Quality control metrics
@@ -396,11 +484,12 @@ This project was developed as part of a professional reconversion from clinical 
 - Awareness of quality management systems (ISO 15189)
 
 ### Technical Skills
-- **Backend**: Python, data structures, algorithms
+- **Backend**: Python, modular architecture, object-oriented programming
+- **Testing**: pytest, unit testing, test-driven development (TDD)
 - **Frontend**: Streamlit, UI/UX design
 - **AI/ML**: LLM integration, prompt engineering, NLP
-- **Data Engineering**: CSV processing, data validation
-- **DevOps**: Git, version control, documentation
+- **Data Engineering**: CSV processing, data validation, pandas
+- **DevOps**: Git, version control, documentation, deployment
 
 ### Skills Demonstrated
 
@@ -409,6 +498,7 @@ This project was developed as part of a professional reconversion from clinical 
 - ✅ Local AI deployment and optimization
 - ✅ User interface design for domain experts
 - ✅ Software architecture and modularity
+- ✅ **Test-driven development**
 - ✅ Quality assurance principles
 - ✅ Technical documentation and communication
 - ✅ Privacy-first application design
@@ -431,8 +521,9 @@ Transitioning from clinical laboratory work to AI/Data Science, combining:
 - Deep understanding of healthcare data workflows
 - Strong foundation in biochemistry and analytical methods
 - Emerging expertise in AI, machine learning, and software development
+- **Test-driven development** and quality assurance mindset
 
-This project bridges domain expertise with cutting-edge AI technology, demonstrating the ability to identify real-world problems and design practical AI solutions while maintaining data security and quality standards.
+This project bridges domain expertise with cutting-edge AI technology, demonstrating the ability to identify real-world problems and design practical AI solutions while maintaining data security, quality standards, and code reliability through comprehensive testing.
 
 ---
 
@@ -462,6 +553,7 @@ It is designed to assist laboratory professionals in performing unit conversions
 - **Ollama Team** for outstanding local LLM infrastructure
 - **Meta AI** for Llama 3.2 model
 - **Streamlit** community for excellent documentation
+- **pytest** developers for robust testing framework
 - Clinical laboratory colleagues for requirements validation and testing
 
 ---
@@ -484,3 +576,5 @@ If you find this project useful, please consider giving it a ⭐ on GitHub!
 **Built with ❤️ for the clinical laboratory community**
 
 *Combining medical expertise with artificial intelligence for safer, more efficient healthcare*
+
+**Quality Guaranteed:** 42 tests, 100% passing ✅
